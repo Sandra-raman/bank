@@ -10,10 +10,34 @@
 </head>
 <body>
         <div class=" container text-center bg-info p-4 w-25 mt-5 ">
-            <input type="text" placeholder="UserName" class="form-control mt-5 mb-4">
-            <input type="text" placeholder="Account Number" class="form-control">
-            <input type="password" placeholder="password" class="form-control my-4">
-            <button class="btn btn-primary">Register</button>
+            <input type="text" placeholder="UserName" class="form-control mt-5 mb-4 " id="user">
+            <input type="text" placeholder="Account Number" class="form-control" id="accno">
+            <input type="password" placeholder="password" class="form-control my-4" id="pass">
+             <a href="./login.html"><button class="btn btn-primary" onclick="register()">Register</button></a>
         </div>
+        
 </body>
+<script>
+    function register(){
+    let details={
+        UserName:user.value,
+        AccountNumber:accno.value,
+        Password:pass.value
+    }
+    if(details.UserName==""||details.AccountNumber==""||details.Password=="")
+        {
+            alert('Please fill the following details')
+        }
+        else{
+            if(details.AccountNumber in localStorage){
+                alert("Already entered this data")
+            }
+            else{
+    localStorage.setItem(details.AccountNumber, JSON.stringify(details));
+    alert("Successfully added data")
+        }
+    }
+}
+
+</script>
 </html>

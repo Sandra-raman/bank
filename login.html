@@ -10,10 +10,22 @@
 </head>
 <body>
         <div class=" container text-center bg-dark p-4 w-25 mt-5 ">
-            <input type="text" placeholder="Account Number" class="form-control">
-            <input type="password" placeholder="password" class="form-control my-4">
-            <button class="btn btn-primary my-2">Login</button><br>
-            <a href="">forget password</a><span class="text-light"> or </span> <a href="">SignUp</a>
+            <input type="text" placeholder="Account Number" class="form-control" id="accno">
+            <input type="password" placeholder="password" class="form-control my-4" id="pass">
+            <button class="btn btn-primary my-2" onclick="login()">Login</button><br>
+            <a href="">forget password</a><span class="text-light"> or </span> <a href="">SignUp
         </div>
 </body>
+<script>
+function login(){
+    let Acc=accno.value;
+    if(Acc in localStorage){
+        alert("Login Successful")
+         window.location.href = "./home.html"
+    }
+    else{
+        alert("Account Number is not registered")
+    }
+}
+</script>
 </html>
