@@ -21,10 +21,10 @@
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="#">Services</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" href="#">About Us</a>
             </ul>
           </div>
         </div>
@@ -37,10 +37,10 @@
       <div class="row">
         <div class="col-6 container text-center w-25">
             <h2>Deposit</h2>
-            <input type="text" placeholder="Deposit Amount" class="form-control mt-3" id="Deposit">
-            <input type="text" placeholder="Account Number" class="form-control my-3" id="Accno">
+            <input type="text" placeholder="Deposit Amount" class="form-control mt-3" id="DAmount">
+            <input type="text" placeholder="Account Number" class="form-control my-3" id="Acc">
             <button class="btn btn-success" onclick="deposit()">Deposit</button>
-            <p id="depo"></p>
+            <p id="Avalue"></p>
         </div>
         <div class="col-6 w-25 container text-center">
             <h2>Withdraw</h2>
@@ -53,42 +53,52 @@
       </div>
 </body>
 <script>
-  function deposit(val){
-   let dep=Deposit.value;
-   if(Accno.value in localStorage){
-    if(Accno.value){
-    console.log(dep);
-    depo.innerHTML=`<p class="text-success m-2 p-2">Your current balance is ${dep}</p>`
+  function deposit(){
+    let Depo={
+     Amount:DAmount.value,
+     accno:Acc.value
+    }
+    console.log(Depo.Amount);
+    console.log(Depo.accno);
     
-   }
-   else{
-    alert("Error");
-   }
-  }
-   else{
-    alert("Wrong pass")
-   }
+    
+      if(Depo.accno in localStorage){
+        htmldata=`<p>Your current balance is ${Depo.Amount}</p>`
+        Avalue.innerHTML=htmldata;
+        }
+      else{
+        alert("Invalid Account Number")
+      }
+      globalDAmount = Depo.Amount;
+      }
+    
    
-   
-  }
 
-  function withdraw(){
-    let Withdraw=w.value;
-    let dep=Deposit.value;
-    for(Accno.value in localStorage){
-      if(dep>=Withdraw){
-        let balance=dep-Withdraw;
-        wdraw.innerHTML=`<p class="text-danger m-2 p-2">Your current balance is ${balance}</p>`
-
-        
+function withdraw() {
+  let Withdraw={
+     WithdrawAmount:parseFloat(w.value),
+     accno:Accno.value
+    }
+    console.log(Withdraw.WithdrawAmount);
+    console.log(globalDAmount);
+    console.log(Withdraw.accno);
+    if(Withdraw.accno in localStorage){
+      if(Withdraw.WithdrawAmount<=globalDAmount){
+      let newAmount=globalDAmount-Withdraw.WithdrawAmount;
+      console.log(newAmount);
+      
+      htmldata=`<p>Your Current balance is ${newAmount}</p>`
+      wdraw.innerHTML=htmldata
       }
       else{
-        alert("Insufficient Balance");
-        break;
-        
+        alert('Insufficient balance')
       }
     }
+    else{
+      alert('Incorrect account number')
+    }
+}
 
-  }
+
 </script>
 </html>
